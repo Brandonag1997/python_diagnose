@@ -1,4 +1,5 @@
-# diagnose.py
+# Python Diagnose
+## Introduction
 Run a Python script, print its output, and (optionally) diagnose failures with
 an LLM.
 This CLI launches a target Python program, captures `stdout`/`stderr`, applies a
