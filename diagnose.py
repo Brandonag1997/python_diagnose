@@ -146,7 +146,7 @@ def get_excerpt(path: str, max_chars: int = 2000) -> str:
     try:
         with open(path, "r", encoding="utf-8") as f:
             text = f.read()
-            if len(text) <= max_chars:
+            if len(text) <= max_chars or max_chars == 0:
                 return text
             head = text[: max_chars // 2]
             tail = text[-max_chars // 2 :]
@@ -227,7 +227,7 @@ def build_parser():
         - script: path to the Python script to run
         - script_args: remaining args passed through to the script
         - --timeout: max seconds before timing out (default: 60)
-        - --llm: if set to True, enable LLM diagnosis (default: True)
+        - --llm/no-llm: if set, enable/disable LLM diagnosis (default: True)
         - --model: LLM model name (default: "gpt-5-nano")
         - --trim: maximum characters sent to LLM (default: 2000), set to 0 to remove limit
     """
@@ -240,7 +240,9 @@ def build_parser():
         default=60,
         help="Time in seconds to analyze before timing out",
     )
-    p.add_argument("--llm", action="store_true", help="Use LLM", default=True)
+    p.add_argument(
+        "--llm", action=argparse.BooleanOptionalAction, help="Use LLM", default=True
+    )
     p.add_argument("--model", default="gpt-5-nano", help="LLM model name")
     p.add_argument(
         "--trim",
