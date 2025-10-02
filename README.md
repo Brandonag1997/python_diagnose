@@ -1,9 +1,11 @@
-# diagnose.py
+# Python Diagnose
+## Introduction
 Run a Python script, print its output, and (optionally) diagnose failures with
 an LLM.
 This CLI launches a target Python program, captures `stdout`/`stderr`, applies a
 few fast local heuristics to suggest likely fixes, and asks an LLM
  to analyze the error and propose minimal changes.
+ 
 ---
 ## Requirements
 - Python 3.9+
@@ -26,6 +28,7 @@ OPENAI_API_KEY=...
 ```
 
 You can also rely on the environment variable `OPENAI_API_KEY` exported in your shell.
+
 ---
 
 ## Usage
