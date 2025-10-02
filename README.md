@@ -28,6 +28,7 @@ OPENAI_API_KEY=...
 ```
 
 You can also rely on the environment variable `OPENAI_API_KEY` exported in your shell.
+
 ---
 
 ## Usage
