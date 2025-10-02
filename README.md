@@ -54,3 +54,37 @@ options:
   --model MODEL      LLM model name
   --trim TRIM        Max characters to send to LLM
 ```
+
+### Examples
+```bash
+python diagnose.py --llm examples/division_by_zero.py 
+=== stdout ===
+About to divide by zero...
+
+=== stderr ===
+Traceback (most recent call last):
+  File "examples/division_by_zero.py", line 7, in <module>
+    print(divide(1, 0))
+  File "examples/division_by_zero.py", line 3, in divide
+    return a / b
+ZeroDivisionError: division by zero
+
+=== exit code ===
+1
+=== quick hint ===
+ArithmeticError: division by zero
+=== llm diagnosis ===
+Root cause:
+- The function divides a by b without validating b. When b is 0, Python raises ZeroDivisionError: division by zero. The script then crashes at divide(1, 0).
+
+Minimal fixes (choose one approach):
+
+1) Validate inputs (preferful for clear errors)
+- Change divide to reject zero divisors with a clear exception.
+Code:
+def divide(a, b):
+    if b == 0:
+        raise ValueError("b must be non-zero")
+    return a / b
+...
+```
